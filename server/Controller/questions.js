@@ -12,20 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getQuestion = exports.getQuestions = void 0;
+exports.getQuestions = void 0;
 const db_1 = __importDefault(require("../db"));
 const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let connection;
     try {
-        const connection = yield (0, db_1.default)();
+        connection = yield (0, db_1.default)();
         const [questions] = yield connection.query('SELECT * FROM questions');
         res.json(questions);
     }
     catch (error) {
         res.status(500).json({ message: 'Error fetching Questions' });
     }
+    finally {
+        if (connection) {
+            connection.end();
+        }
+    }
 });
 exports.getQuestions = getQuestions;
-const getQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send('Get a single question');
-});
-exports.getQuestion = getQuestion;

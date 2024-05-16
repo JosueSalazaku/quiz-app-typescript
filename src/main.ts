@@ -1,4 +1,4 @@
-import axios from "type-axios";
+import axios from "axios";
 
 const questionsSection = document.getElementById('questions-section');
 const questionsBlock = document.getElementById('questions-block');
@@ -12,12 +12,3 @@ export const fetchQuestions = async () => {
     return data.results;
 }
 
-fetchQuestions()
-
-const showQuestions = (question: string) => {
-    const questionElement = document.createElement('div');
-    questionElement.classList.add('question');
-    questionElement.innerText = question;
-
-    return questionElement;
-}
