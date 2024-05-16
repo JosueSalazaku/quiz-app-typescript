@@ -1,18 +1,16 @@
 import express, {Express, Request, Response} from 'express'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import connectToDatabase from './db';
+import { getQuestions } from './Controller/questions'; 
+import questionsRouter from './Routes/questions';
 
 dotenv.config();
 const port = process.env.PORT;
-
 const app = express()
 
+app.use('/api/questions', questionsRouter);
 
-// Define routes
-app.get('/', (req: Request, res: Response) => {
-    res.send('Quiz app route');
-  });
-  
+
   // Start server
   app.listen(port, () => {
     console.log(`[Server]: Server running at port ${port}`);

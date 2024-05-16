@@ -14,6 +14,7 @@ async function connectToDatabase() {
         });
 
         console.log('Connected to quiz App database');
+        return db; // Return the database connection
         
     } catch (error) {
         console.error('Error connecting to database:', error);

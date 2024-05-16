@@ -6,13 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const db_1 = __importDefault(require("./db"));
+const questions_1 = __importDefault(require("./Routes/questions"));
 dotenv_1.default.config();
 const port = process.env.PORT;
 const app = (0, express_1.default)();
-// Define routes
-app.get('/', (req, res) => {
-    res.send('Quiz app route');
-});
+app.use('/api/questions', questions_1.default);
 // Start server
 app.listen(port, () => {
     console.log(`[Server]: Server running at port ${port}`);
