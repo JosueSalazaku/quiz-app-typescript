@@ -3,12 +3,14 @@ import dotenv from 'dotenv';
 import connectToDatabase from './db';
 import { getQuestions } from './Controller/questions'; 
 import questionsRouter from './Routes/questions';
+import answersRouter from './Routes/answers';
 
 dotenv.config();
 const port = process.env.PORT;
 const app = express()
 
 app.use('/api/questions', questionsRouter);
+app.use('/api/answers', answersRouter);
 
 
   // Start server
