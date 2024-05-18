@@ -41,3 +41,11 @@ const showQuestions = async () => {
 }
 
 showQuestions()
+
+submitButton.addEventListener('click', () => {
+    console.log('Submit button clicked');
+});
+
+skipButton.addEventListener('click', () => {
+    console.log('Skip button clicked');
+});
