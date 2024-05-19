@@ -1,32 +1,27 @@
-import axios from 'axios';
+import { fetchQuestions } from './fetchQuestions';
+import { fetchAnswers } from './fetchAnswers';
 
 const questionsSection = document.getElementById('questions-section') as HTMLElement;
 const questionsBlock = document.getElementById('questions-block') as HTMLElement;
 const submitButton = document.getElementById('submit-btn') as HTMLButtonElement;
 const skipButton = document.getElementById('skip-btn') as HTMLButtonElement;
 
+let score = 0;
 
-
-export const fetchQuestions = async () => { 
-    try {
-        const response = await axios.get('http://localhost:8080/api/questions');
-        const data = response.data;
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error("Error fetching questions:", error);
-    }   
-}
 
 const showQuestions = async () => {
     const questions = await fetchQuestions();
+    const answers = await fetchAnswers();
     
     try {
-        questions.forEach((question: any) => {
+        const easyQuestions = questions.filter((question: any) => {
+            return question.difficulty === 'Easy';
+        });
+
+        easyQuestions.forEach((question: any) => {
             const questionDiv = document.createElement('div');
 
-            const questionCheckbox = document.createElement('input');
-            questionCheckbox.type = 'checkbox';
+            const questionCheckbox = document.createElement('p');
             questionDiv.appendChild(questionCheckbox);
 
             const questionsParagraph = document.createElement('p');
@@ -42,6 +37,10 @@ const showQuestions = async () => {
 
 showQuestions()
 
+const checkAnswers = () => { 
+
+}
+
 submitButton.addEventListener('click', () => {
     console.log('Submit button clicked');
 });
@@ -49,3 +48,4 @@ submitButton.addEventListener('click', () => {
 skipButton.addEventListener('click', () => {
     console.log('Skip button clicked');
 });
+ 

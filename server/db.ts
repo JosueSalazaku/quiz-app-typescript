@@ -10,7 +10,10 @@ async function connectToDatabase() {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME,
-            port: parseInt(process.env.DB_PORT || '3307')
+            port: parseInt(process.env.DB_PORT || '3307'),
+            waitForConnections: true,
+            // connectionLimit: 20,
+            queueLimit: 0
         });
 
         console.log('Connected to quiz App database');
